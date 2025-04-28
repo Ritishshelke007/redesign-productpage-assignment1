@@ -1,6 +1,7 @@
 import authRoute from '@/configs/routes.config/authRoute'
 import { useLocation } from 'react-router-dom'
 import AuthLayout from './AuthLayout'
+import LayoutBase from '@/components/template/LayoutBase'
 import type { CommonProps } from '@/@types/common'
 
 const PreLoginLayout = ({ children }: CommonProps) => {
@@ -12,7 +13,12 @@ const PreLoginLayout = ({ children }: CommonProps) => {
 
     return (
         <div className="flex flex-auto flex-col h-[100vh]">
-            {isAuthPath ? <AuthLayout>{children}</AuthLayout> : children}
+            {isAuthPath ? (
+                <AuthLayout>{children}</AuthLayout>
+            ) : (
+                // Provide minimal context for PageContainer/useLayout
+                <LayoutBase type="public">{children}</LayoutBase>
+            )}
         </div>
     )
 }
