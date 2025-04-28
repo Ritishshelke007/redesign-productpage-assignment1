@@ -8,6 +8,8 @@ import appConfig from '@/configs/app.config'
 import { useAuth } from '@/auth'
 import { Routes, Route, Navigate } from 'react-router-dom'
 import type { LayoutType } from '@/@types/theme'
+import { lazy } from 'react'
+import Home from "@/views/Home"
 
 interface ViewsProps {
     pageContainerType?: 'default' | 'gutterless' | 'contained'
@@ -23,49 +25,62 @@ const AllRoutes = (props: AllRoutesProps) => {
 
     return (
         <Routes>
-            <Route path="/" element={<ProtectedRoute />}>
-                <Route
-                    path="/"
-                    element={<Navigate replace to={authenticatedEntryPath} />}
-                />
-                {protectedRoutes.map((route, index) => (
-                    <Route
-                        key={route.key + index}
-                        path={route.path}
-                        element={
-                            <AuthorityGuard
-                                userAuthority={user.authority}
-                                authority={route.authority}
-                            >
-                                <PageContainer {...props} {...route.meta}>
-                                    <AppRoute
-                                        routeKey={route.key}
-                                        component={route.component}
-                                        {...route.meta}
-                                    />
-                                </PageContainer>
-                            </AuthorityGuard>
-                        }
-                    />
-                ))}
-                <Route path="*" element={<Navigate replace to="/" />} />
-            </Route>
-            <Route path="/" element={<PublicRoute />}>
-                {publicRoutes.map((route) => (
-                    <Route
-                        key={route.path}
-                        path={route.path}
-                        element={
+    {/* Home page always public */}
+    <Route
+    path="/"
+    element={
+        <PageContainer {...props}>
+            <AppRoute
+                routeKey="homePage"
+                component={Home}
+            />
+        </PageContainer>
+    }
+/>
+
+    {/* Protected routes */}
+    <Route element={<ProtectedRoute />}>
+        {protectedRoutes.map((route, index) => (
+            <Route
+                key={route.key + index}
+                path={route.path}
+                element={
+                    <AuthorityGuard
+                        userAuthority={user.authority}
+                        authority={route.authority}
+                    >
+                        <PageContainer {...props} {...route.meta}>
                             <AppRoute
                                 routeKey={route.key}
                                 component={route.component}
                                 {...route.meta}
                             />
-                        }
-                    />
-                ))}
-            </Route>
-        </Routes>
+                        </PageContainer>
+                    </AuthorityGuard>
+                }
+            />
+        ))}
+    </Route>
+
+    {/* Public routes (other than '/') */}
+    <Route element={<PublicRoute />}>
+        {publicRoutes
+            .filter(route => route.path !== '/')
+            .map((route) => (
+                <Route
+                    key={route.path}
+                    path={route.path}
+                    element={
+                        <AppRoute
+                            routeKey={route.key}
+                            component={route.component}
+                            {...route.meta}
+                        />
+                    }
+                />
+            ))}
+    </Route>
+</Routes>
     )
 }
 

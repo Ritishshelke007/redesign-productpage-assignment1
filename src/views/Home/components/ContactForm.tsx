@@ -77,9 +77,9 @@ const ContactForm = () => {
                         <div className="space-y-6">
                             {/* Contact Details */}
                             <div className="flex items-center space-x-4">
-                                <div className="bg-purple-100 p-3 rounded-lg">
-                                    <BiPhone className="w-6 h-6 text-primary" />
-                                </div>
+                            <div className="bg-gradient-to-br from-primary/20 to-blue-200/40 p-3 rounded-xl shadow-md flex items-center justify-center transition-transform duration-200 hover:scale-110">
+        <BiPhone className="w-6 h-6 text-primary drop-shadow" />
+      </div>
                                 <div>
                                     <p className="text-gray-600">Phone</p>
                                     <a href="tel:+919811396858" className="text-gray-900 hover:text-primary transition-colors">
@@ -89,9 +89,9 @@ const ContactForm = () => {
                             </div>
 
                             <div className="flex items-center space-x-4">
-                                <div className="bg-purple-100 p-3 rounded-lg">
-                                    <CgMail className="w-6 h-6 text-primary" />
-                                </div>
+                            <div className="bg-gradient-to-br from-primary/20 to-blue-200/40 p-3 rounded-xl shadow-md flex items-center justify-center transition-transform duration-200 hover:scale-110">
+        <CgMail className="w-6 h-6 text-primary drop-shadow" />
+      </div>
                                 <div>
                                     <p className="text-gray-600">Email</p>
                                     <a href="mailto:hello@gogetwell.ai" className="text-gray-900 hover:text-primary transition-colors">
@@ -105,12 +105,20 @@ const ContactForm = () => {
                         <div>
                             <h3 className="text-xl font-semibold text-gray-900 mb-4">Connect With Us</h3>
                             <div className="flex space-x-4">
-                                <Link to="https://x.com/gogetwellai" target='_blank' className="bg-purple-100 p-3 rounded-lg hover:bg-purple-200 transition-colors">
-                                    <BsTwitter className="w-6 h-6 text-primary" />
-                                </Link>
-                                <Link to="https://www.linkedin.com/company/gogetwellai/" target='_blank' className="bg-purple-100 p-3 rounded-lg hover:bg-purple-200 transition-colors">
-                                    <BsLinkedin className="w-6 h-6 text-primary" />
-                                </Link>
+                            <Link
+        to="https://x.com/gogetwellai"
+        target="_blank"
+        className="bg-gradient-to-br from-primary/20 to-blue-200/40 p-3 rounded-xl shadow-md flex items-center justify-center transition-transform duration-200 hover:scale-110"
+      >
+        <BsTwitter className="w-6 h-6 text-primary" />
+      </Link>
+      <Link
+        to="https://www.linkedin.com/company/gogetwellai/"
+        target="_blank"
+        className="bg-gradient-to-br from-primary/20 to-blue-200/40 p-3 rounded-xl shadow-md flex items-center justify-center transition-transform duration-200 hover:scale-110"
+      >
+        <BsLinkedin className="w-6 h-6 text-primary" />
+      </Link>
                             </div>
                         </div>
                     </div>

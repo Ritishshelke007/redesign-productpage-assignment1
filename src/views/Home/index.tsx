@@ -1,81 +1,90 @@
 import React, { useEffect, useRef } from 'react';
 import HeroSection from './components/HeroSection';
+import FeaturesGrid from './components/FeaturesGrid';
+import SocialProof from './components/SocialProof';
+import InfoSection from './components/InfoSection';
 import HomeFAQs from './components/HomeFAQ';
 import ContactForm from './components/ContactForm';
 import MainFooter from './components/MainFooter';
-import InfoSection from './components/InfoSection';
-import FeaturesGrid from './components/FeaturesGrid';
 
 const Home: React.FC = () => {
-	const contactRef = useRef(null);
-	const aboutRef = useRef(null);
-	const FqRef = useRef(null);
-	const scrollToSection = (ref) => {
-		ref.current.scrollIntoView({ behavior: 'smooth' });
-	};
+  const contactRef = useRef(null);
+  const aboutRef = useRef(null);
+  const faqRef = useRef(null);
+  const featuresRef = useRef(null);
 
-	useEffect(() => {
-		let lastScrollTop = 0; // Initialize lastScrollTop variable
+  const scrollToSection = (ref) => {
+    ref.current.scrollIntoView({ behavior: 'smooth' });
+  };
 
-		const handleScroll = () => {
-			const hcf = document.querySelector(".hcf-profile");
-			const scrollTop =
-				document.documentElement.scrollTop || document.body.scrollTop;
+  useEffect(() => {
+    let lastScrollTop = 0;
 
-			if (scrollTop > lastScrollTop) {
-				if (hcf) {
-					hcf.classList.add("hcf-profile-fixed");
-				}
-			} else if (scrollTop < lastScrollTop) {
-				if (hcf) {
-					hcf.classList.remove("hcf-profile-fixed");
-				}
-			}
+    const handleScroll = () => {
+      const hcf = document.querySelector('.hcf-profile');
+      const scrollTop =
+        document.documentElement.scrollTop || document.body.scrollTop;
 
-			lastScrollTop = scrollTop;
-		};
+      if (scrollTop > lastScrollTop) {
+        if (hcf) {
+          hcf.classList.add('hcf-profile-fixed');
+        }
+      } else if (scrollTop < lastScrollTop) {
+        if (hcf) {
+          hcf.classList.remove('hcf-profile-fixed');
+        }
+      }
 
+      lastScrollTop = scrollTop;
+    };
 
-		// Add scroll event listener
-		window.addEventListener("scroll", handleScroll);
+    window.addEventListener('scroll', handleScroll);
 
-		// Cleanup the event listener on unmount
-		return () => {
-			window.removeEventListener("scroll", handleScroll);
-		};
-	}, []);
-	return (
-		<>
-			<div>
-				<div className="">
-					<HeroSection
-						scrollToSection={scrollToSection}
-						featuresRef={FqRef}
-						contactRef={contactRef}
-						aboutRef={aboutRef}
-					/>
-					{/* <div className='bg-white'>
-						<ClaimLandingSection />
-					</div> */}
-					<div className='!bg-[#eff6ff] relative'>
-						<FeaturesGrid />
-					</div>
-					<div className='!bg-white relative' ref={aboutRef}>
-						<InfoSection />
-					</div>
-					<div className='relative bg-white' ref={FqRef}>
-						<HomeFAQs />
-					</div>
-					<div className='bg-white relative' ref={contactRef}>
-						<ContactForm />
-					</div>
-					{/* <div className='bg-white'>
-						<MainFooter />
-					</div> */}
-				</div>
-			</div>
-		</>
-	);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  return (
+    <>
+      <div>
+        {/* Hero Section */}
+        <HeroSection
+          scrollToSection={scrollToSection}
+          faqRef={faqRef}
+          contactRef={contactRef}
+          aboutRef={aboutRef}
+          featuresRef={featuresRef}
+        />
+
+        {/* Features Section */}
+        <div className="!bg-[#eff6ff] relative" ref={featuresRef}>
+          <FeaturesGrid />
+        </div>
+
+        {/* Social Proof Section */}
+        <SocialProof />
+
+        {/* Info/About Section */}
+        <div ref={aboutRef}>
+          <InfoSection />
+        </div>
+
+        {/* FAQ Section */}
+        <div ref={faqRef}>
+          <HomeFAQs />
+        </div>
+
+        {/* Contact Section */}
+        <div ref={contactRef}>
+          <ContactForm />
+        </div>
+
+        {/* Footer */}
+        {/* <MainFooter /> */}
+      </div>
+    </>
+  );
 };
 
 export default Home;

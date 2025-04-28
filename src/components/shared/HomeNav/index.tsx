@@ -19,6 +19,7 @@ interface HomeNavbarProps {
 	featuresRef?: React.RefObject<HTMLElement>;
 	aboutRef?: React.RefObject<HTMLElement>;
 	contactRef?: React.RefObject<HTMLElement>;
+	faqRef?: React.RefObject<HTMLElement>;
 }
 
 /**
@@ -51,6 +52,7 @@ const HomeNavbar: React.FC<HomeNavbarProps> = ({
 	featuresRef,
 	aboutRef,
 	contactRef,
+	faqRef,
 }) => {
 	const { user } = useAuth();
 
@@ -64,7 +66,7 @@ const HomeNavbar: React.FC<HomeNavbarProps> = ({
 		{
 			text: 'F&Q',
 			to: '/features',
-			ref: featuresRef,
+			ref: faqRef,
 			icon: '🎯',
 		},
 		{

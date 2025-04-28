@@ -1,28 +1,60 @@
 import React, { useState } from 'react';
 import { BiChevronDown } from 'react-icons/bi';
 
-const FAQItem = ({ question, answer, isOpen, onClick }) => (
-    <div className="border-b border-indigo-100">
-		<button
-            onClick={onClick}
-            className="w-full py-2 px-0 md:px-4 flex items-center justify-between text-left transition-colors hover:bg-indigo-50/50 rounded-lg"
-        >
-            <h3 className="text-[16px] leading-[1.2] font-medium text-gray-900 pr-8">{question}</h3>
-            <div className={`flex-shrink-0 ml-2 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}>
-                <BiChevronDown className="w-5 h-5 text-indigo-600" />
-            </div>
-        </button>
-
-        <div
-            className={`overflow-hidden transition-all duration-300 ease-in-out ${isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
-                }`}
-        >
-            <div className="p-2 md:p-4 pt-0 text-gray-600">
-                {answer}
-            </div>
-        </div>
+const FAQItem = ({ question, answer, isOpen, onClick } : {
+    question: string;
+    answer: string;
+    isOpen: boolean;
+    onClick: () => void;
+}) => (
+  <div
+    className={`border-b border-indigo-100 transition-shadow duration-300 ${
+      isOpen ? 'shadow-md bg-indigo-50/40' : ''
+    }`}
+  >
+    <button
+      onClick={onClick}
+      className={`w-full py-2 px-0 md:px-4 flex items-center justify-between text-left transition-colors rounded-lg
+        ${isOpen ? 'text-indigo-700 font-semibold' : ''}
+        hover:bg-indigo-50/60 focus:outline-none`}
+    >
+      <h3
+        className={`text-[16px] leading-[1.2] font-medium pr-8 transition-colors duration-300 ${
+          isOpen ? 'text-indigo-700' : 'text-gray-900'
+        }`}
+      >
+        {question}
+      </h3>
+      <div
+        className={`flex-shrink-0 ml-2 transition-transform duration-300 ${
+          isOpen ? 'rotate-180 scale-110 text-indigo-700' : ''
+        }`}
+      >
+        <BiChevronDown className="w-5 h-5 text-indigo-600" />
+      </div>
+    </button>
+    <div
+      className={`overflow-hidden transition-all duration-400 ease-in-out ${
+        isOpen ? 'max-h-96 opacity-100 translate-y-0' : 'max-h-0 opacity-0 -translate-y-2'
+      }`}
+      style={{
+        willChange: 'opacity, max-height, transform',
+      }}
+    >
+      <div
+        className={`p-2 md:p-4 pt-0 text-gray-600 animate-fade-in ${
+          isOpen ? 'animate-fadeIn' : 'animate-fadeOut'
+        }`}
+        style={{
+          transition: 'opacity 0.4s, transform 0.4s',
+        }}
+      >
+        {answer}
+      </div>
     </div>
+  </div>
 );
+
 
 const FAQ = () => {
     const [openIndex, setOpenIndex] = useState(0);

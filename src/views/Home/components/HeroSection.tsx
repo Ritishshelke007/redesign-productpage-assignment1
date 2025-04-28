@@ -1,124 +1,103 @@
-import smallBG from '@/assets/images/main-bg-small.png';
-import { Button } from '@/components/ui';
+import React from 'react';
 import HomeNavbar from '@/components/shared/HomeNav';
-import HcfSignupPopup from '@/components/shared/Popups/HcfSignupPopup';
+import { Button } from '@/components/ui';
 
 interface HeroSectionProps {
-    scrollToSection: (ref: React.RefObject<HTMLElement>) => void;
-    featuresRef: React.RefObject<HTMLElement>;
-    contactRef: React.RefObject<HTMLElement>;
-    aboutRef: React.RefObject<HTMLElement>;
+  scrollToSection: (ref: React.RefObject<HTMLElement>) => void;
+  featuresRef: React.RefObject<HTMLElement>;
+  faqRef: React.RefObject<HTMLElement>;
+  contactRef: React.RefObject<HTMLElement>;
+  aboutRef: React.RefObject<HTMLElement>;
 }
 
+const YOUTUBE_VIDEO_URL = "https://www.youtube.com/embed/xQl8i2sO_Ls"; // Replace with your own video
+
 const HeroSection: React.FC<HeroSectionProps> = ({
-    scrollToSection,
-    featuresRef,
-    contactRef,
-    aboutRef,
+  scrollToSection,
+  featuresRef,
+  faqRef,
+  contactRef,
+  aboutRef,
 }) => {
-
-
-    return (
-        <div className="!bg-[#01052f] w-full relative flex flex-col py-2 md:py-5 overflow-hidden">
-            <HomeNavbar
-                scrollToSection={scrollToSection}
-                featuresRef={featuresRef}
-                contactRef={contactRef}
-                aboutRef={aboutRef}
-            />
-
-            <div className='min-h-[90vh] flex items-center'>
-                {/* Background video for larger screens */}
-                {/* <video
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                    className="hidden md:block absolute top-0 left-0 min-w-full min-h-full object-cover z-[-10]"
-                >
-                    <source src={bgVideo} type="video/mp4" />
-                    Your browser does not support the video tag.
-                </video> */}
-
-                {/* Background image for mobile */}
-                <img
-                    src={smallBG}
-                    alt="background_image"
-                    className="md:hidden h-full w-full object-cover absolute top-0 left-0 z-[-10]"
-                />
-
-                {/* Overlay to ensure text readability */}
-                <div className="absolute top-0 left-0 w-full h-full bg-black opacity-50 z-[-5]"></div>
-
-                <div className="relative z-10 text-white w-full flex flex-col lg:flex-row-reverse md:mt-6 lg:mt-0 lg:items-center lg:justify-between px-4 max-w-[1538px] mx-auto">
-                    {/* Video Section */}
-                    <div className="lg:w-5/12 mt-8 lg:mt-0 lg:mb-0 mb-6">
-                        {/* <div className="relative overflow-hidden pt-[56.25%] rounded-lg shadow-lg">
-                            <iframe
-                                src={`https://www.youtube.com/embed/xQl8i2sO_Ls?autoplay=1&mute=${isMuted ? 1 : 0
-                                    }&loop=1&playlist=xQl8i2sO_Ls&controls=0&showinfo=0&rel=0`}
-                                title="Product Demo Video"
-                                frameBorder="0"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                allowFullScreen
-                                className="absolute top-0 left-0 w-full h-full"
-                            ></iframe>
-                            <button
-                                onClick={toggleMute}
-                                className="absolute bottom-4 right-4 bg-black bg-opacity-50 p-2 rounded-full hover:bg-opacity-75 transition-all"
-                            >
-                                {isMuted ? (
-                                    <IoVolumeMuteOutline size={24} />
-                                ) : (
-                                    <IoVolumeHighOutline size={24} />
-                                )}
-                            </button>
-                        </div> */}
-                    </div>
-
-                    {/* Content Section */}
-                    <div className="lg:w-1/2 lg:pr-8">
-                        <h1 className="text-2xl md:text-4xl font-semibold mb-4 capitalize text-white">
-                            <span className="text-primary">AI front office </span> <br />
-                            for healthcare agents
-                        </h1>
-                        <p style={{ lineHeight: '0.7' }} className="text-lg my-8 font-light">
-                            Create <span className="text-primary font-bold">AI Store</span>  in 2 min <br />
-                            <br />
-                            Scale with{' '}
-                            <span className="font-bold text-primary">
-                                Digital Marketing
-                            </span>{' '}
-                        </p>
-                        <div>
-                            <HcfSignupPopup popupButtonStatus buttonChildren={<Button block variant='solid' className='rounded-[5px] max-w-[200px]'>Get Started</Button>} />
-                        </div>
-                        <div className="text-white flex gap-12 mt-8 flex-wrap">
-                            <div>
-                                <h1 className="text-3xl font-bold text-white">
-                                    2100<span className="text-primary ml-1">+</span>
-                                </h1>
-                                <p className="text-lg capitalize">qualified doctors</p>
-                            </div>
-                            <div>
-                                <h1 className="text-3xl font-bold text-white">
-                                    1000<span className="text-primary ml-1">+</span>
-                                </h1>
-                                <p className="text-lg capitalize">hospitals</p>
-                            </div>
-                            <div>
-                                <h1 className="text-3xl font-bold text-white">
-                                    800<span className="text-primary ml-1">+</span>
-                                </h1>
-                                <p className="text-lg capitalize">Treatment Plans</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+  return (
+    <div className="relative min-h-[100vh] flex flex-col bg-[#0a165c]">
+      {/* Navbar with solid background */}
+      <div className="w-full bg-[#0a165c] z-20 shadow-md sticky top-0">
+        <HomeNavbar
+          scrollToSection={scrollToSection}
+          featuresRef={featuresRef}
+          contactRef={contactRef}
+          aboutRef={aboutRef}
+          faqRef = {faqRef}
+        />
+      </div>
+      {/* Hero Content */}
+      <div className="flex flex-col-reverse md:flex-row items-center justify-between max-w-7xl mx-auto px-4 py-12 md:py-24 w-full flex-1">
+        {/* Left: Text */}
+        <div className="w-full md:w-1/2 mt-8 md:mt-0">
+          <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-4 leading-tight drop-shadow">
+            <span className="text-primary">AI Front Office</span> for Healthcare Providers
+          </h1>
+          <p className="text-lg md:text-2xl text-blue-100 mb-8 max-w-xl">
+            Instantly launch a professional website, automate patient engagement, manage leads, and streamline your healthcare business with intelligent AI.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4">
+            <Button
+              className="bg-primary hover:bg-blue-700 text-white font-semibold px-8 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-400 transition"
+              onClick={() => scrollToSection(contactRef)}
+              aria-label="Get Started"
+            >
+              Get Started Free
+            </Button>
+            <Button
+              variant="outline"
+              className="border-primary text-primary hover:bg-blue-50 px-8 py-3 rounded-lg"
+              onClick={() => scrollToSection(featuresRef)}
+              aria-label="See Features"
+            >
+              See Features
+            </Button>
+          </div>
+          <div className="mt-8 text-blue-200 text-sm flex items-center gap-2">
+            <svg className="w-5 h-5 text-green-400 inline" fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 00-1.414 0L9 11.586 6.707 9.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l7-7a1 1 0 000-1.414z"/></svg>
+            No credit card required. Start your free trial today.
+          </div>
+          <div className="mt-4 text-xs text-blue-300">
+            Trusted by clinics, hospitals, and independent practitioners worldwide.
+          </div>
+          {/* Metrics Bar */}
+          <div className="mt-10 flex gap-8">
+            <div className="flex flex-col items-center">
+              <span className="text-3xl font-bold text-primary">5000+</span>
+              <span className="text-blue-100 text-lg capitalize">Qualified Doctors</span>
             </div>
-
+            <div className="flex flex-col items-center">
+              <span className="text-3xl font-bold text-primary">1000+</span>
+              <span className="text-blue-100 text-lg capitalize">Hospitals</span>
+            </div>
+            <div className="flex flex-col items-center">
+              <span className="text-3xl font-bold text-primary">800+</span>
+              <span className="text-blue-100 text-lg capitalize">Treatment Plans</span>
+            </div>
+          </div>
         </div>
-    );
+        {/* Right: Video */}
+        <div className="w-full md:w-1/2 flex justify-center items-center mb-8 md:mb-0">
+          <div className="relative overflow-hidden pt-[56.25%] w-full max-w-md rounded-xl shadow-lg bg-black">
+            <iframe
+              src={YOUTUBE_VIDEO_URL}
+              title="Product Demo Video"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              className="absolute top-0 left-0 w-full h-full rounded-xl"
+              aria-label="GoGetWell Product Demo Video"
+            ></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default HeroSection;
